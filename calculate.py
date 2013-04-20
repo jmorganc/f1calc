@@ -4,7 +4,9 @@ points = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
 drivers = ('Sebastian Vettel', 'Mark Webber', 'Fernando Alonso', 'Felipe Massa', 'Jenson Button', 'Sergio Perez', 'Kimi Raikkonen', 'Romain Grosjean', 'Nico Rosberg', 'Lewis Hamilton', 'Nico Hulkenberg', 'Esteban Gutierrez', 'Paul di Resta', 'Adrian Sutil', 'Pastor Maldonado', 'Valtteri Bottas', 'Jean-Eric Vergne', 'Daniel Ricciardo', 'Charles Pic', 'Giedo van der Garde', 'Jules Bianchi', 'Max Chilton')
 grandsprix = ('Australian GP', 'Malaysian GP', 'Chinese GP', 'Bahrain GP', 'Spanish GP', 'Monaco GP', 'Canadian GP', 'British GP', 'German GP', 'Hungarian GP', 'Belgian GP', 'Italian GP', 'Singapore GP', 'Korean GP', 'Japanese GP', 'Indian GP', 'Abu Dhabi GP', 'United States GP', 'Brazilian GP')
 # The championship order which should change throughout the season
-drivers_order = {}
+drivers_order = []
+for driver in drivers:
+    drivers_order.append(-1)
 #
 drivers_points = []
 # Still in the running for the championship
@@ -105,17 +107,28 @@ def tally_points():
     for driver_id, driver in enumerate(drivers_json):
         for gp_id, gp in enumerate(drivers_json[driver_id]):
             drivers_points[driver_id] += gp
+    print drivers_points
 tally_points()
-print drivers_points
 
 
 #
-def order_drivers():
-    for driver_id, points in enumerate(drivers_points):
-        drivers_order[driver_id] = points
-order_drivers()
-print drivers_order
+# def order_drivers():
+#     for driver_id, points in enumerate(drivers_points):
+#         drivers_order[driver_id] = points
+# def order_drivers():
+#     drivers_order = drivers_points
+#     for driver_id, points in enumerate(drivers_order):
+#         lowest_points = min(drivers_order[driver_id:])
+#         lowest_index = drivers_order[driver_id:].index(lowest_points)
+#         drivers_order[driver_id + lowest_index] = drivers_order[driver_id]
+#         drivers_order[driver_id] = lowest_points
+#     print drivers_order
+def order_drivers(local_drivers_points):
+    for i, points in enumerate(local_drivers_points):
+        if points > drivers_order[i]:
+            pass
 
+order_drivers(drivers_points)
 
 
 
