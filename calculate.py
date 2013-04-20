@@ -15,7 +15,6 @@ grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
 
 #
 def save_drivers(drivers, grandsprix, drivers_json):
-    # drivers_json = json.loads(open('drivers.json', 'r').read())
     for driver in drivers:
         if not driver in drivers_json:
             drivers_json[driver] = {}
@@ -28,7 +27,6 @@ save_drivers(drivers, grandsprix, drivers_json)
 
 #
 def save_grandsprix(grandsprix, drivers, grandsprix_json):
-    # grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
     for gp in grandsprix:
         if not gp in grandsprix_json:
             grandsprix_json[gp] = {}
@@ -46,13 +44,10 @@ def record_race(circuit, points_finishers, grandsprix, drivers, grandsprix_json,
         drivers_json[drivers[driver_id]][grandsprix[circuit]] = points[place]
     save_grandsprix(grandsprix, drivers, grandsprix_json)
     save_drivers(drivers, grandsprix, drivers_json)
+record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7], grandsprix, drivers, grandsprix_json, drivers_json)
 record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16], grandsprix, drivers, grandsprix_json, drivers_json)
+record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10], grandsprix, drivers, grandsprix_json, drivers_json)
 
-
-# # Malaysia race results
-# calendars_drivers[1] = [0, 1, 9, 8, 3, 7, 6, 10, 5, 16]
-# # China race results
-# calendars_drivers[2] = [2, 6, 9, 0, 4, 3, 17, 12, 7, 10]
 
 # @TODO: The rare case that <10 drivers finish a race?
 # @TODO: Data validation: No duplicate drivers

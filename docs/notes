@@ -5,3 +5,4 @@ JSON files to replace lists / data structures?
 Move stuff off to modules/classes
 Database?
     prepend tables with year e.g. 2013_drivers, 2013_grandsprix
+Should I be recording place or points in the JSON files?
