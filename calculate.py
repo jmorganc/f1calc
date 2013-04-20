@@ -3,28 +3,36 @@ import json
 points = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
 drivers = ('Sebastian Vettel', 'Mark Webber', 'Fernando Alonso', 'Felipe Massa', 'Jenson Button', 'Sergio Perez', 'Kimi Raikkonen', 'Romain Grosjean', 'Nico Rosberg', 'Lewis Hamilton', 'Nico Hulkenberg', 'Esteban Gutierrez', 'Paul di Resta', 'Adrian Sutil', 'Pastor Maldonado', 'Valtteri Bottas', 'Jean-Eric Vergne', 'Daniel Ricciardo', 'Charles Pic', 'Giedo van der Garde', 'Jules Bianchi', 'Max Chilton')
 grandsprix = ('Australian GP', 'Malaysian GP', 'Chinese GP', 'Bahrain GP', 'Spanish GP', 'Monaco GP', 'Canadian GP', 'British GP', 'German GP', 'Hungarian GP', 'Belgian GP', 'Italian GP', 'Singapore GP', 'Korean GP', 'Japanese GP', 'Indian GP', 'Abu Dhabi GP', 'United States GP', 'Brazilian GP')
-# The championship order
-# This should change throughout the season
+# The championship order which should change throughout the season
 driver_order = []
+# Still in the running for the championship
+drivers_eligible = []
+# Mathematically impossible to win the championship
+drivers_ineligible = []
 
 
 def save_drivers(drivers, grandsprix):
-    try:
-        drivers_json = json.loads(open('drivers.json', 'r').read())
-        for driver in drivers:
-            if not driver in drivers_json:
-                drivers_json[driver] = {}
-            for gp in grandsprix:
-                if not gp in drivers_json[driver]:
-                    drivers_json[driver][gp] = 0
-    except:
-        drivers_json = {}
-        for driver in drivers:
+    drivers_json = json.loads(open('drivers.json', 'r').read())
+    for driver in drivers:
+        if not driver in drivers_json:
             drivers_json[driver] = {}
-            for gp in grandsprix:
+        for gp in grandsprix:
+            if not gp in drivers_json[driver]:
                 drivers_json[driver][gp] = 0
-        open('drivers.json', 'w').write(json.dumps(drivers_json, indent=4, sort_keys=True))
+    open('drivers.json', 'w').write(json.dumps(drivers_json, indent=4, sort_keys=True))
 save_drivers(drivers, grandsprix)
+
+
+def save_grandsprix(grandsprix, drivers):
+    grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
+    for gp in grandsprix:
+        if not gp in grandsprix_json:
+            grandsprix_json[gp] = {}
+        for driver in drivers:
+            if not driver in grandsprix_json[gp]:
+                grandsprix_json[gp][driver] = 0
+    open('grandsprix.json', 'w').write(json.dumps(grandsprix_json, indent=4, sort_keys=True))
+save_grandsprix(grandsprix, drivers)
 
 
 # Initialize the race results for each grand prix
