@@ -13,16 +13,22 @@ for gp in calendar:
 
 # Australia race results
 calendars_drivers[0] = [6, 2, 0, 3, 9, 1, 13, 12, 4, 7]
+# Malaysia race results
+calendars_drivers[1] = [0, 1, 9, 8, 3, 7, 6, 10, 5, 16]
+# China race results
+calendars_drivers[2] = [2, 6, 9, 0, 4, 3, 17, 12, 7, 10]
+
 # Make sure there are 10 drivers (points finishers)
 # @TODO: The rare case that <10 drivers finish a race?
-if (len(calendars_drivers[0]) == 10):
-    # Check to make sure there are no duplicates
-    if (len(calendars_drivers[0]) == len(set(calendars_drivers[0]))):
-        print calendars_drivers
+for index, gp in enumerate(calendars_drivers):
+    if (len(gp) == 10):
+        # Check to make sure there are no duplicates
+        if (len(gp) == len(set(gp))):
+            print calendar[index] + ': ' + str(gp)
+        else:
+            print 'Error! There is a duplicate driver'
     else:
-        print 'Error! There is a duplicate driver'
-else:
-    print 'Error! There are too (many|few) drivers'
+        print 'Error! There are too (many|few) drivers'
 
 # Initialize the points
 # The index of drivers_points matches that of drivers
@@ -33,7 +39,7 @@ for driver in drivers:
 for gp in calendars_drivers:
     for index, driver in enumerate(gp):
         drivers_points[driver] += points[index]
-print drivers_points
+print 'Driver points: ' + str(drivers_points)
 
 
 
