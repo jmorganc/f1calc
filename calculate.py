@@ -13,18 +13,21 @@ drivers_eligible = []
 drivers_ineligible = []
 drivers_json = json.loads(open('drivers.json', 'r').read())
 grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
+drivers_json_associative = json.loads(open('drivers_associative.json', 'r').read())
+grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r').read())
 
 
+# ASSOCIATIVE, NOT PLANNED TO USE
+def save_drivers_associative():
+    for driver in drivers:
+        if not driver in drivers_json_associative:
+            drivers_json_associative[driver] = {}
+        for gp in grandsprix:
+            if not gp in drivers_json_associative[driver]:
+                drivers_json_associative[driver][gp] = 0
+    open('drivers_associative.json', 'w').write(json.dumps(drivers_json_associative, indent=4, sort_keys=True))
+save_drivers_associative()
 #
-# def save_drivers():
-#     for driver in drivers:
-#         if not driver in drivers_json:
-#             drivers_json[driver] = {}
-#         for gp in grandsprix:
-#             if not gp in drivers_json[driver]:
-#                 drivers_json[driver][gp] = 0
-#     open('drivers.json', 'w').write(json.dumps(drivers_json, indent=4, sort_keys=True))
-# save_drivers()
 def save_drivers():
     for driver_index, driver in enumerate(drivers):
         while len(drivers_json) < len(drivers):
@@ -36,16 +39,17 @@ def save_drivers():
 save_drivers()
 
 
+# ASSOCIATIVE, NOT PLANNED TO USE
+def save_grandsprix_associative():
+    for gp in grandsprix:
+        if not gp in grandsprix_json_associative:
+            grandsprix_json_associative[gp] = {}
+        for driver in drivers:
+            if not driver in grandsprix_json_associative[gp]:
+                grandsprix_json_associative[gp][driver] = 0
+    open('grandsprix_associative.json', 'w').write(json.dumps(grandsprix_json_associative, indent=4, sort_keys=True))
+save_grandsprix_associative()
 #
-# def save_grandsprix():
-#     for gp in grandsprix:
-#         if not gp in grandsprix_json:
-#             grandsprix_json[gp] = {}
-#         for driver in drivers:
-#             if not driver in grandsprix_json[gp]:
-#                 grandsprix_json[gp][driver] = 0
-#     open('grandsprix.json', 'w').write(json.dumps(grandsprix_json, indent=4, sort_keys=True))
-# save_grandsprix()
 def save_grandsprix():
     for gp_index, gp in enumerate(grandsprix):
         while len(grandsprix_json) < len(grandsprix):
@@ -57,16 +61,17 @@ def save_grandsprix():
 save_grandsprix()
 
 
+# ASSOCIATIVE, NOT PLANNED TO USE
+def record_race_associative(circuit, points_finishers):
+    for place, driver_id in enumerate(points_finishers):
+        grandsprix_json_associative[grandsprix[circuit]][drivers[driver_id]] = points[place]
+        drivers_json_associative[drivers[driver_id]][grandsprix[circuit]] = points[place]
+    save_grandsprix_associative()
+    save_drivers_associative()
+record_race_associative(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
+record_race_associative(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
+record_race_associative(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 #
-# def record_race(circuit, points_finishers):
-#     for place, driver_id in enumerate(points_finishers):
-#         grandsprix_json[grandsprix[circuit]][drivers[driver_id]] = points[place]
-#         drivers_json[drivers[driver_id]][grandsprix[circuit]] = points[place]
-#     save_grandsprix()
-#     save_drivers()
-# record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
-# record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
-# record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 def record_race(circuit, points_finishers):
     for place, driver_id in enumerate(points_finishers):
         drivers_json[driver_id][circuit] = points[place]
