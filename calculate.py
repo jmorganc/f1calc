@@ -39,12 +39,14 @@ def save_grandsprix(grandsprix, drivers, grandsprix_json):
 save_grandsprix(grandsprix, drivers, grandsprix_json)
 
 
-#
-def record_race(contest, points_finishers, grandsprix_json, grandsprix, drivers):
+# @TODO: Clean this shit up!
+def record_race(circuit, points_finishers, grandsprix, drivers, grandsprix_json, drivers_json):
     for place, driver_id in enumerate(points_finishers):
-        grandsprix_json[grandsprix[contest]][drivers[driver_id]] = points[place]
+        grandsprix_json[grandsprix[circuit]][drivers[driver_id]] = points[place]
+        drivers_json[drivers[driver_id]][grandsprix[circuit]] = points[place]
     save_grandsprix(grandsprix, drivers, grandsprix_json)
-record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16], grandsprix_json, grandsprix, drivers)
+    save_drivers(drivers, grandsprix, drivers_json)
+record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16], grandsprix, drivers, grandsprix_json, drivers_json)
 
 
 # # Malaysia race results
