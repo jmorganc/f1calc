@@ -86,7 +86,7 @@ for driver in drivers:
 #
 def tally_points():
     for driver_id, driver in enumerate(drivers_json):
-        for gp_id, gp in enumerate(drivers_json[driver]):
+        for gp_id, gp in enumerate(drivers_json[driver_id]):
             drivers_points[driver_id] += gp
 tally_points()
 print drivers_points
