@@ -11,6 +11,19 @@ calendars_drivers = []
 for gp in calendar:
     calendars_drivers.append([])
 
+# Australia race results
+calendars_drivers[0] = [6, 2, 0, 3, 9, 1, 13, 12, 4, 7]
+# Make sure there are 10 drivers (points finishers)
+# @TODO: The rare case that <10 drivers finish a race?
+if (len(calendars_drivers[0]) == 10):
+    # Check to make sure there are no duplicates
+    if (len(calendars_drivers[0]) == len(set(calendars_drivers[0]))):
+        print calendars_drivers
+    else:
+        print 'Error! There is a duplicate driver'
+else:
+    print 'Error! There are too (many|few) drivers'
+
 # Initialize the points
 # The index of drivers_points matches that of drivers
 drivers_points = []
@@ -22,9 +35,9 @@ for driver in drivers:
 
 
 
-
+###################################################
 ###################################################
 # First place in every race
 max_points_possible = points[0] * len(calendar)
-print max_points_possible
-print drivers_points
+# print max_points_possible
+# print drivers_points
