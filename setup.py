@@ -4,12 +4,12 @@ except ImportError:
     from distutils.core import setup
 
 config = {
-    'description': 'My Project',
+    'description': 'Calculate the permutations for the F1 Championship',
     'author': 'Morgan Campbell',
-    'url': 'URL to get it at.',
-    'download_url': 'Where to download it.',
+    'url': '',
+    'download_url': '',
     'author_email': 'jmorgancampbell@gmail.com',
-    'version': '0.1',
+    'version': '0.0.1',
     'install_requires': ['nose'],
     'packages': ['f1calc'],
     'scripts': [],
