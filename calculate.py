@@ -49,24 +49,8 @@ record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16], grandsprix, drivers, grandsprix
 record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10], grandsprix, drivers, grandsprix_json, drivers_json)
 
 
-# @TODO: The rare case that <10 drivers finish a race?
-# @TODO: Data validation: No duplicate drivers
-grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
-for gp in grandsprix_json:
-    print 'GRAND PRIX: ' + gp
-    for driver in grandsprix_json[gp]:
-        print driver + ': ' + str(grandsprix_json[gp][driver])
 
-# Initialize the points
-# The index of drivers_points matches that of drivers
-drivers_points = []
-for driver in drivers:
-    drivers_points.append(0)
 
-# for gp in calendars_drivers:
-#     for index, driver in enumerate(gp):
-#         drivers_points[driver] += points[index]
-# print 'Driver points: ' + str(drivers_points)
 
 
 
