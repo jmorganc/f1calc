@@ -11,6 +11,7 @@ drivers_eligible = []
 drivers_ineligible = []
 
 
+#
 def save_drivers(drivers, grandsprix):
     drivers_json = json.loads(open('drivers.json', 'r').read())
     for driver in drivers:
@@ -23,6 +24,7 @@ def save_drivers(drivers, grandsprix):
 save_drivers(drivers, grandsprix)
 
 
+#
 def save_grandsprix(grandsprix, drivers):
     grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
     for gp in grandsprix:
@@ -33,6 +35,11 @@ def save_grandsprix(grandsprix, drivers):
                 grandsprix_json[gp][driver] = 0
     open('grandsprix.json', 'w').write(json.dumps(grandsprix_json, indent=4, sort_keys=True))
 save_grandsprix(grandsprix, drivers)
+
+
+#
+def record_race(grandprix = -1, drivers = []):
+    pass
 
 
 # # Malaysia race results
