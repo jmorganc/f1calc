@@ -75,11 +75,24 @@ def record_race(circuit, points_finishers):
         grandsprix_json[circuit][driver_id] = points[place]
     save_drivers()
     save_grandsprix()
-    save_grandsprix_associative()
-    save_drivers_associative()
+    record_race_associative(circuit, points_finishers)
+# Australia
 record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
+# Malaysia
 record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
+# China
 record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# Testing
+record_race(3, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(4, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(5, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(6, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(7, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(8, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(9, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(10, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(11, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+record_race(12, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 
 
 # Initialize
