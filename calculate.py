@@ -4,7 +4,7 @@ points = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
 drivers = ('Sebastian Vettel', 'Mark Webber', 'Fernando Alonso', 'Felipe Massa', 'Jenson Button', 'Sergio Perez', 'Kimi Raikkonen', 'Romain Grosjean', 'Nico Rosberg', 'Lewis Hamilton', 'Nico Hulkenberg', 'Esteban Gutierrez', 'Paul di Resta', 'Adrian Sutil', 'Pastor Maldonado', 'Valtteri Bottas', 'Jean-Eric Vergne', 'Daniel Ricciardo', 'Charles Pic', 'Giedo van der Garde', 'Jules Bianchi', 'Max Chilton')
 grandsprix = ('Australian GP', 'Malaysian GP', 'Chinese GP', 'Bahrain GP', 'Spanish GP', 'Monaco GP', 'Canadian GP', 'British GP', 'German GP', 'Hungarian GP', 'Belgian GP', 'Italian GP', 'Singapore GP', 'Korean GP', 'Japanese GP', 'Indian GP', 'Abu Dhabi GP', 'United States GP', 'Brazilian GP')
 # The championship order which should change throughout the season
-drivers_order = []
+drivers_order = {}
 #
 drivers_points = []
 # Still in the running for the championship
@@ -68,9 +68,6 @@ def record_race_associative(circuit, points_finishers):
         drivers_json_associative[drivers[driver_id]][grandsprix[circuit]] = points[place]
     save_grandsprix_associative()
     save_drivers_associative()
-record_race_associative(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
-record_race_associative(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
-record_race_associative(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 #
 def record_race(circuit, points_finishers):
     for place, driver_id in enumerate(points_finishers):
@@ -78,6 +75,8 @@ def record_race(circuit, points_finishers):
         grandsprix_json[circuit][driver_id] = points[place]
     save_drivers()
     save_grandsprix()
+    save_grandsprix_associative()
+    save_drivers_associative()
 record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
 record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
 record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
@@ -95,6 +94,15 @@ def tally_points():
             drivers_points[driver_id] += gp
 tally_points()
 print drivers_points
+
+
+#
+def order_drivers():
+    for driver_id, points in enumerate(drivers_points):
+        drivers_order[driver_id] = points
+order_drivers()
+print drivers_order
+
 
 
 
