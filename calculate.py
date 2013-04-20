@@ -35,29 +35,18 @@ def save_grandsprix(grandsprix, drivers):
 save_grandsprix(grandsprix, drivers)
 
 
-# Initialize the race results for each grand prix
-calendars_drivers = []
-for gp in grandsprix:
-    calendars_drivers.append([])
-
-# Australia race results
-calendars_drivers[0] = [6, 2, 0, 3, 9, 1, 13, 12, 4, 7]
-# Malaysia race results
-calendars_drivers[1] = [0, 1, 9, 8, 3, 7, 6, 10, 5, 16]
-# China race results
-calendars_drivers[2] = [2, 6, 9, 0, 4, 3, 17, 12, 7, 10]
+# # Malaysia race results
+# calendars_drivers[1] = [0, 1, 9, 8, 3, 7, 6, 10, 5, 16]
+# # China race results
+# calendars_drivers[2] = [2, 6, 9, 0, 4, 3, 17, 12, 7, 10]
 
 # Make sure there are 10 drivers (points finishers)
 # @TODO: The rare case that <10 drivers finish a race?
-for index, gp in enumerate(calendars_drivers):
-    if (len(gp) == 10):
-        # Check to make sure there are no duplicates
-        if (len(gp) == len(set(gp))):
-            print grandsprix[index] + ': ' + str(gp)
-        else:
-            print 'Error! There is a duplicate driver'
-    else:
-        print 'Error! There are too (many|few) drivers'
+grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
+for gp in grandsprix_json:
+    print 'GRAND PRIX: ' + gp
+    for driver in grandsprix_json[gp]:
+        print driver + ': ' + str(grandsprix_json[gp][driver])
 
 # Initialize the points
 # The index of drivers_points matches that of drivers
@@ -65,10 +54,10 @@ drivers_points = []
 for driver in drivers:
     drivers_points.append(0)
 
-for gp in calendars_drivers:
-    for index, driver in enumerate(gp):
-        drivers_points[driver] += points[index]
-print 'Driver points: ' + str(drivers_points)
+# for gp in calendars_drivers:
+#     for index, driver in enumerate(gp):
+#         drivers_points[driver] += points[index]
+# print 'Driver points: ' + str(drivers_points)
 
 
 
