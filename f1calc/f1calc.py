@@ -30,6 +30,11 @@ drivers_points = []
 for driver in drivers:
     drivers_points.append(0)
 
+for gp in calendars_drivers:
+    for index, driver in enumerate{gp}:
+        drivers_points[driver] += points(index)
+print drivers_points
+
 
 
 
