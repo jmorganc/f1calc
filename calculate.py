@@ -7,16 +7,25 @@ grandsprix = ('Australian GP', 'Malaysian GP', 'Chinese GP', 'Bahrain GP', 'Span
 drivers_order = []
 for driver in drivers:
     drivers_order.append(-1)
-#
+# How many points each driver currently has, unordered
 drivers_points = []
-# Still in the running for the championship
+# Still in the running for the championship (everyone at the beginning, thinning as the season progresses)
 drivers_eligible = []
-# Mathematically impossible to win the championship
+# Mathematically impossible to win the championship (empty at the beginning, filling as the season progresses)
 drivers_ineligible = []
 drivers_json = json.loads(open('drivers.json', 'r').read())
 grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
 drivers_json_associative = json.loads(open('drivers_associative.json', 'r').read())
 grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r').read())
+
+
+# Clear the JSON files
+# def reset_json():
+#     open('drivers.json', 'w').write('[]')
+#     open('grandsprix.json', 'w').write('[]')
+#     open('drivers_associative.json', 'w').write('{}')
+#     open('grandsprix_associative.json', 'w').write('{}')
+# reset_json()
 
 
 # ASSOCIATIVE, NOT PLANNED TO USE
@@ -85,16 +94,16 @@ record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
 # China
 record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # Testing
-record_race(3, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(4, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(5, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(6, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(7, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(8, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(9, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(10, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(11, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
-record_race(12, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(3, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(4, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(5, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(6, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(7, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(8, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(9, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(10, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(11, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# record_race(12, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 
 
 # Initialize
@@ -127,12 +136,17 @@ def order_drivers(local_drivers_points):
     for i, points in enumerate(local_drivers_points):
         if points > drivers_order[i]:
             pass
-
 order_drivers(drivers_points)
 
 
+# Return the place in the championship of the provided driver
+def driver_place(driver):
+    pass
 
 
+# Return the driver in the provided place in the championship
+def place_driver(place):
+    pass
 
 
 
