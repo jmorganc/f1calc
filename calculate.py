@@ -1,4 +1,4 @@
-from f1calc.f1calc import FCalculator
+from f1calc.f1calc import F1Calculator
 
 
 points = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
