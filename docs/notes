@@ -1,9 +1,16 @@
-Make a restful API to query? Yes!
-Move stuff off to modules/classes
+#################################################
+TODO
+#################################################
+Restful API
+
+
+#################################################
+GENERAL
+#################################################
 Database?
     prepend tables with year e.g. 2013_drivers, 2013_grandsprix
-Should I be recording place or points in the JSON files?
-    Currently doing points. This can change at any time
+Any benefit to recording place instead of points in the JSON file?
+    Place never changes, points can?
 
 
 #################################################

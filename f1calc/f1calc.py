@@ -1,6 +1,6 @@
 import json
 
-class FCalculator(object):
+class F1Calculator(object):
 
     points = ()
     drivers = ()
@@ -157,16 +157,6 @@ class FCalculator(object):
             print 'Please specify a driver.'
 
 
-    # Return the place in the championship of the provided driver
-    def driver_place(self, driver):
-        pass
-
-
-    # Return the driver in the provided place in the championship
-    def place_driver(self, place):
-        pass
-
-
     #
     # def order_drivers():
     #     for driver_id, points in enumerate(self.drivers_points):
@@ -179,8 +169,23 @@ class FCalculator(object):
     #         drivers_order[driver_id + lowest_index] = self.drivers_order[driver_id]
     #         drivers_order[driver_id] = lowest_points
     #     print drivers_order
+    
+    # What I want to be happening here is...
+    # Order the drivers_orders list with the id of the driver, from first in the championship to last
+    # So a championship order of Alonso, Raikkonen, Vettel, Hamilton, Webber... would look like...
+    # [2, 6, 0, 9, 1...]
     def order_drivers(self):
         print 'order_drivers'
         for i, points in enumerate(self.drivers_points):
             if points > self.drivers_order[i]:
                 pass
+
+
+    # Return the place in the championship of the provided driver
+    def driver_place(self, driver):
+        pass
+
+
+    # Return the driver in the provided place in the championship
+    def place_driver(self, place):
+        pass
