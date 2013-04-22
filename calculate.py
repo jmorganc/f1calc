@@ -10,10 +10,7 @@ F1 = FCalculator(points, drivers, grandsprix)
 
 # Clear out the JSON files of everything
 F1.reset_json()
-F1.save_drivers_associative()
-F1.save_drivers()
-F1.save_grandsprix_associative()
-F1.save_grandsprix()
+F1.save_all()
 
 
 # Australia
@@ -39,4 +36,5 @@ F1.record_race(3, [0, 6, 7, 12, 9, 5, 1, 2, 8, 4])
 F1.tally_points()
 F1.driver_number_races_in_points(0)
 F1.driver_number_races_in_points("Fernando Alonso")
+F1.driver_number_races_in_points("Morgan Campbell")
 F1.order_drivers()

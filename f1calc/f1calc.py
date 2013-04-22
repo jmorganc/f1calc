@@ -57,6 +57,14 @@ class FCalculator(object):
         print 'Reset.'
 
 
+    # I'm Lazy
+    def save_all(self):
+        self.save_drivers_associative()
+        self.save_drivers()
+        self.save_grandsprix_associative()
+        self.save_grandsprix()
+
+
     # Write each driver and their grands prix to JSON dictionary
     def save_drivers_associative(self):
         for driver in self.drivers:
@@ -133,15 +141,18 @@ class FCalculator(object):
 
     # Return how many races the provided driver has scored points in
     def driver_number_races_in_points(self, driver = None):
-        print 'driver_number_races_in_points' + "\n\t",
+        print 'driver_number_races_in_points(' + str(driver) + ')' + "\n\t",
         if driver is not None:
             # Check if integer index or string (full name)
             if isinstance(driver, int):
                 print self.drivers[driver] + ': ' + str(self.drivers_points_finishes[driver])
                 print "\t" + 'Total points: ' + str(self.drivers_points[driver])
             else:
-                print driver + ': ' + str(self.drivers_points_finishes[self.drivers.index(driver)])
-                print "\t" + 'Total points: ' + str(self.drivers_points[self.drivers.index(driver)])
+                if driver in self.drivers:
+                    print driver + ': ' + str(self.drivers_points_finishes[self.drivers.index(driver)])
+                    print "\t" + 'Total points: ' + str(self.drivers_points[self.drivers.index(driver)])
+                else:
+                    print 'This is an unrecognized driver.'
         else:
             print 'Please specify a driver.'
 
