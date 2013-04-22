@@ -31,10 +31,26 @@ class F1Calculator(object):
         # First place in every race
         self.max_points_possible = points[0] * len(grandsprix)
 
-        self.drivers_json = json.loads(open('drivers.json', 'r').read())
-        self.grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
-        self.drivers_json_associative = json.loads(open('drivers_associative.json', 'r').read())
-        self.grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r').read())
+        try:
+            open('drivers.json', 'r')
+            self.drivers_json = json.loads(open('drivers.json', 'r').read())
+        except IOError:
+            open('drivers.json', 'w').write(json.dumps(self.drivers_json))
+        try:
+            open('grandsprix.json', 'r')
+            self.grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
+        except IOError:
+            open('grandsprix.json', 'w').write(json.dumps(self.grandsprix_json))
+        try:
+            open('drivers_associative.json', 'r')
+            self.drivers_json_associative = json.loads(open('drivers_associative.json', 'r').read())
+        except IOError:
+            open('drivers_associative.json', 'w').write(json.dumps(self.drivers_json_associative))
+        try:
+            open('grandsprix_associative.json', 'r')
+            self.grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r').read())
+        except IOError:
+            open('grandsprix_associative.json', 'w').write(json.dumps(self.grandsprix_json_associative))
 
         # Initialize
         for driver in self.drivers:
