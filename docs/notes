@@ -1,8 +1,12 @@
 Make a restful API to query? Yes!
-JSON files to replace lists / data structures?
-	Probably. Can change it around and re-run program to see different options?
-	Build JSON (drivers and grandsprix) from constants in the code
 Move stuff off to modules/classes
 Database?
     prepend tables with year e.g. 2013_drivers, 2013_grandsprix
 Should I be recording place or points in the JSON files?
+    Currently doing points. This can change at any time
+
+
+#################################################
+TESTING
+#################################################
+Assert [Sebastian Vettel, 0] has [77] points.

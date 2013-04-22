@@ -1,14 +1,16 @@
 import json
+from f1calc.f1calc import FCalculator
+
 
 points = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
 drivers = ('Sebastian Vettel', 'Mark Webber', 'Fernando Alonso', 'Felipe Massa', 'Jenson Button', 'Sergio Perez', 'Kimi Raikkonen', 'Romain Grosjean', 'Nico Rosberg', 'Lewis Hamilton', 'Nico Hulkenberg', 'Esteban Gutierrez', 'Paul di Resta', 'Adrian Sutil', 'Pastor Maldonado', 'Valtteri Bottas', 'Jean-Eric Vergne', 'Daniel Ricciardo', 'Charles Pic', 'Giedo van der Garde', 'Jules Bianchi', 'Max Chilton')
 grandsprix = ('Australian GP', 'Malaysian GP', 'Chinese GP', 'Bahrain GP', 'Spanish GP', 'Monaco GP', 'Canadian GP', 'British GP', 'German GP', 'Hungarian GP', 'Belgian GP', 'Italian GP', 'Singapore GP', 'Korean GP', 'Japanese GP', 'Indian GP', 'Abu Dhabi GP', 'United States GP', 'Brazilian GP')
 # The championship order which should change throughout the season
 drivers_order = []
-for driver in drivers:
-    drivers_order.append(-1)
 # How many points each driver currently has, unordered
 drivers_points = []
+#
+drivers_points_finishes = []
 # Still in the running for the championship (everyone at the beginning, thinning as the season progresses)
 drivers_eligible = []
 # Mathematically impossible to win the championship (empty at the beginning, filling as the season progresses)
@@ -20,12 +22,16 @@ grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r'
 
 
 # Clear the JSON files
-# def reset_json():
-#     open('drivers.json', 'w').write('[]')
-#     open('grandsprix.json', 'w').write('[]')
-#     open('drivers_associative.json', 'w').write('{}')
-#     open('grandsprix_associative.json', 'w').write('{}')
-# reset_json()
+def reset_json():
+    del(drivers_json[:])
+    del(grandsprix_json[:])
+    drivers_json_associative.clear()
+    grandsprix_json_associative.clear()
+    open('drivers.json', 'w').write(json.dumps(drivers_json))
+    open('grandsprix.json', 'w').write(json.dumps(grandsprix_json))
+    open('drivers_associative.json', 'w').write(json.dumps(drivers_json_associative))
+    open('grandsprix_associative.json', 'w').write(json.dumps(grandsprix_json_associative))
+reset_json()
 
 
 # ASSOCIATIVE, NOT PLANNED TO USE
@@ -93,8 +99,9 @@ record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
 record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
 # China
 record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
+# Bahrain
+record_race(3, [0, 6, 7, 12, 9, 5, 1, 2, 8, 4])
 # Testing
-# record_race(3, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # record_race(4, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # record_race(5, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # record_race(6, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
@@ -109,14 +116,18 @@ record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # Initialize
 for driver in drivers:
     drivers_points.append(0)
-
+    drivers_points_finishes.append(0)
+    drivers_order.append(-1)
 
 #
 def tally_points():
+    print 'tally_points' + "\n\t",
     for driver_id, driver in enumerate(drivers_json):
         for gp_id, gp in enumerate(drivers_json[driver_id]):
             drivers_points[driver_id] += gp
-    print drivers_points
+            if gp >= 1:
+                drivers_points_finishes[driver_id] += 1
+    print str(drivers_points)
 tally_points()
 
 
@@ -133,6 +144,7 @@ tally_points()
 #         drivers_order[driver_id] = lowest_points
 #     print drivers_order
 def order_drivers(local_drivers_points):
+    print 'order_drivers'
     for i, points in enumerate(local_drivers_points):
         if points > drivers_order[i]:
             pass
@@ -149,6 +161,24 @@ def place_driver(place):
     pass
 
 
+# Return how many races the provided driver has scored points in
+def driver_number_races_in_points(driver = None):
+    print 'driver_number_races_in_points' + "\n\t",
+    if driver is not None:
+        # Check if integer index or string (full name)
+        if isinstance(driver, int):
+            print drivers[driver] + ': ' + str(drivers_points_finishes[driver])
+            print "\t" + 'Total points: ' + str(drivers_points[driver])
+        else:
+            print driver + ': ' + str(drivers_points_finishes[drivers.index(driver)])
+            print "\t" + 'Total points: ' + str(drivers_points[drivers.index(driver)])
+    else:
+        print 'Please specify a driver.'
+driver_number_races_in_points(0)
+driver_number_races_in_points("Fernando Alonso")
+
+
+
 
 
 
@@ -159,3 +189,5 @@ def place_driver(place):
 max_points_possible = points[0] * len(grandsprix)
 # print max_points_possible
 # print drivers_points
+FCalc = FCalculator()
+FCalc.testing_testing()

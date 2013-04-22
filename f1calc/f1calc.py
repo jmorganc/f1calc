@@ -1,9 +1,20 @@
-import json
+class FCalculator(object):
+
+    # def __init__(self, name, description):
+    #     self.name = name
+    #     self.description = description
+    #     self.paths = {}
+    def __init__(self):
+        return None
 
 
-def save_drivers(drivers, grandsprix):
-    pass
+    def go(self, direction):
+        return self.paths.get(direction, None)
 
 
-def save_grandsprix(grandsprix, drivers):
-    pass
+    def add_paths(self, paths):
+        self.paths.update(paths)
+
+
+    def testing_testing(self):
+        print "It works!"
