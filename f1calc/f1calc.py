@@ -1,4 +1,5 @@
 import json
+import operator
 
 class F1Calculator(object):
 
@@ -56,7 +57,7 @@ class F1Calculator(object):
         for driver in self.drivers:
             self.drivers_points.append(0)
             self.drivers_points_finishes.append(0)
-            self.drivers_order.append(-1)
+            #self.drivers_order.append(-1)
 
 
     # Clear the JSON files
@@ -173,35 +174,30 @@ class F1Calculator(object):
             print 'Please specify a driver.'
 
 
-    #
-    # def order_drivers():
-    #     for driver_id, points in enumerate(self.drivers_points):
-    #         self.drivers_order[driver_id] = points
-    # def order_drivers():
-    #     drivers_order = self.drivers_points
-    #     for driver_id, points in enumerate(self.drivers_order):
-    #         lowest_points = min(self.drivers_order[driver_id:])
-    #         lowest_index = self.drivers_order[driver_id:].index(lowest_points)
-    #         drivers_order[driver_id + lowest_index] = self.drivers_order[driver_id]
-    #         drivers_order[driver_id] = lowest_points
-    #     print drivers_order
-    
-    # What I want to be happening here is...
-    # Order the drivers_orders list with the id of the driver, from first in the championship to last
-    # So a championship order of Alonso, Raikkonen, Vettel, Hamilton, Webber... would look like...
-    # [2, 6, 0, 9, 1...]
+    # The order of the drivers in the championship
     def order_drivers(self):
-        print 'order_drivers'
-        for i, points in enumerate(self.drivers_points):
-            if points > self.drivers_order[i]:
-                pass
+        print 'drivers_points_dict' + "\n\t",
+        drivers_points_dict = {}
+        for index, driver in enumerate(self.drivers):
+            drivers_points_dict[index] = self.drivers_points[index]
+        print drivers_points_dict
+
+        for i in range(len(drivers_points_dict)):
+            driver_id = max(drivers_points_dict.iterkeys(), key=(lambda key: drivers_points_dict[key]))
+            self.drivers_order.append(driver_id)
+            drivers_points_dict[driver_id] = -1
+
+        print 'drivers_order' + "\n\t",
+        print str(self.drivers_order)
+        
+        return self.drivers_order
 
 
     # Return the place in the championship of the provided driver
     def driver_place(self, driver):
-        pass
+        return self.drivers_order.index(driver)
 
 
     # Return the driver in the provided place in the championship
     def place_driver(self, place):
-        pass
+        return self.drivers_order[place]
