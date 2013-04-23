@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <!-- Le styles -->
         <link href="/static/css/bootstrap.css" rel="stylesheet">
@@ -69,8 +71,11 @@
                 <ul class="nav nav-pills pull-right">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
+                    <li><a href="#">Stats</a></li>
+                    <li><a href="#">Blah</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
+                <img src="/static/img/sigma.png" alt="F1Calc Logo" style="margin: 0px 10px 0px 0px; float: left;"/>
                 <h3 class="muted">F1Calc</h3>
             </div>
 

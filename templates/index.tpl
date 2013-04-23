@@ -15,15 +15,23 @@
                 <option value="{{index}}">{{driver}}</option>
             %end
         </select>
+
+        <h4>Championship Order</h4>
+        <p>The current(ish) order(ish) in the drivers' championship.</p>
+        <ol>
+        %for driver in drivers_order:
+            <li>{{drivers[driver]}}</li>
+        %end
+        </ol>
     </div>
 
     <div class="span6">
         <h4>Grands Prix</h4>
         <p>Other stuff cause Scott had some great ideas.</p>
         <select id="grandsprix" name="grandsprix">
-            %for index, grandprix in enumerate(grandsprix):
-                <option value="{{index}}">{{grandprix}}</option>
-            %end
+        %for index, grandprix in enumerate(grandsprix):
+            <option value="{{index}}">{{grandprix}}</option>
+        %end
         </select>
     </div>
 </div>
