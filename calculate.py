@@ -10,10 +10,12 @@ F1 = F1Calculator(points, drivers, grandsprix)
 
 # Clear out the JSON files of everything
 F1.reset_json()
+# Write out the points, drivers and grands prix to JSON on disk
 F1.save_all()
 
 
 # Australia
+# i.e. (first race, [kimi, fernando, sebastian, felipe, lewis, mark, adrian, paul, jenson, romain])
 F1.record_race(0, [6, 2, 0, 3, 9, 1, 13, 12, 4, 7])
 # Malaysia
 F1.record_race(1, [0, 1, 9, 8, 3, 7, 6, 10, 5, 16])
@@ -22,7 +24,6 @@ F1.record_race(2, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 # Bahrain
 F1.record_race(3, [0, 6, 7, 12, 9, 5, 1, 2, 8, 4])
 # Testing a bunch to calculate possibilities at the end of the season easier
-# So obviously Fernando Alonso (2) should win
 F1.record_race(4, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 F1.record_race(5, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
 F1.record_race(6, [2, 6, 9, 0, 4, 3, 17, 12, 7, 10])
@@ -46,11 +47,11 @@ F1.record_race(16, [6, 9, 2, 0, 4, 3, 17, 12, 7, 10])
 #                       This is just one possible permutation between only two drivers.
 
 
-F1.tally_points()
-F1.driver_number_races_in_points(0)
-F1.driver_number_races_in_points("Fernando Alonso")
-F1.driver_number_races_in_points("Morgan Campbell")
-F1.order_drivers()
+print F1.tally_points()
+print F1.driver_number_races_in_points(0)
+print F1.driver_number_races_in_points("Fernando Alonso")
+print F1.driver_number_races_in_points("Morgan Campbell")
+print F1.order_drivers()
 # What place is driver 9 (Lewis Hamilton) in?
 print F1.driver_place(9)
 # Who is in 12th place?

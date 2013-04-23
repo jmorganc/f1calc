@@ -1,5 +1,5 @@
 import json
-import operator
+
 
 class F1Calculator(object):
 
@@ -33,24 +33,20 @@ class F1Calculator(object):
         self.max_points_possible = points[0] * len(grandsprix)
 
         try:
-            open('drivers.json', 'r')
             self.drivers_json = json.loads(open('drivers.json', 'r').read())
-        except IOError:
+        except (IOError, ValueError) as error:
             open('drivers.json', 'w').write(json.dumps(self.drivers_json))
         try:
-            open('grandsprix.json', 'r')
             self.grandsprix_json = json.loads(open('grandsprix.json', 'r').read())
-        except IOError:
+        except (IOError, ValueError) as error:
             open('grandsprix.json', 'w').write(json.dumps(self.grandsprix_json))
         try:
-            open('drivers_associative.json', 'r')
             self.drivers_json_associative = json.loads(open('drivers_associative.json', 'r').read())
-        except IOError:
+        except (IOError, ValueError) as error:
             open('drivers_associative.json', 'w').write(json.dumps(self.drivers_json_associative))
         try:
-            open('grandsprix_associative.json', 'r')
             self.grandsprix_json_associative = json.loads(open('grandsprix_associative.json', 'r').read())
-        except IOError:
+        except (IOError, ValueError) as error:
             open('grandsprix_associative.json', 'w').write(json.dumps(self.grandsprix_json_associative))
 
         # Initialize
@@ -58,6 +54,10 @@ class F1Calculator(object):
             self.drivers_points.append(0)
             self.drivers_points_finishes.append(0)
             #self.drivers_order.append(-1)
+
+        # If the JSON files are empty, this will be pointless.
+        # Just tally it up after recording all the races?
+        #self.tally_points()
 
 
     # Clear the JSON files
@@ -72,6 +72,7 @@ class F1Calculator(object):
         open('drivers_associative.json', 'w').write(json.dumps(self.drivers_json_associative))
         open('grandsprix_associative.json', 'w').write(json.dumps(self.grandsprix_json_associative))
         print 'Reset.'
+        return True
 
 
     # I'm Lazy
@@ -147,49 +148,41 @@ class F1Calculator(object):
 
     # Tally up the points for each driver
     def tally_points(self):
-        print 'tally_points' + "\n\t",
         for driver_id, driver in enumerate(self.drivers_json):
             for gp_id, gp in enumerate(self.drivers_json[driver_id]):
                 self.drivers_points[driver_id] += gp
                 if gp >= 1:
                     self.drivers_points_finishes[driver_id] += 1
-        print str(self.drivers_points)
+        return self.drivers_points
 
 
     # Return how many races the provided driver has scored points in
     def driver_number_races_in_points(self, driver = None):
-        print 'driver_number_races_in_points(' + str(driver) + ')' + "\n\t",
         if driver is not None:
             # Check if integer index or string (full name)
             if isinstance(driver, int):
-                print self.drivers[driver] + ': ' + str(self.drivers_points_finishes[driver])
-                print "\t" + 'Total points: ' + str(self.drivers_points[driver])
+                return (self.drivers_points_finishes[driver], self.drivers[driver])
             else:
                 if driver in self.drivers:
-                    print driver + ': ' + str(self.drivers_points_finishes[self.drivers.index(driver)])
-                    print "\t" + 'Total points: ' + str(self.drivers_points[self.drivers.index(driver)])
+                    return (self.drivers_points_finishes[self.drivers.index(driver)], driver)
                 else:
-                    print 'This is an unrecognized driver.'
+                    #print 'This is an unrecognized driver.'
+                    return (-1, 'Unrecognized Driver')
         else:
-            print 'Please specify a driver.'
+            return (-1, 'Please specify a driver')
 
 
     # The order of the drivers in the championship
     def order_drivers(self):
-        print 'drivers_points_dict' + "\n\t",
         drivers_points_dict = {}
         for index, driver in enumerate(self.drivers):
             drivers_points_dict[index] = self.drivers_points[index]
-        print drivers_points_dict
 
         for i in range(len(drivers_points_dict)):
             driver_id = max(drivers_points_dict.iterkeys(), key=(lambda key: drivers_points_dict[key]))
             self.drivers_order.append(driver_id)
             drivers_points_dict[driver_id] = -1
 
-        print 'drivers_order' + "\n\t",
-        print str(self.drivers_order)
-        
         return self.drivers_order
 
 
