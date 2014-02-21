@@ -1,0 +1,22 @@
+#################################################
+TODO
+#################################################
+Restful API
+Twitter Bootstrap
+
+
+#################################################
+GENERAL
+#################################################
+Generators. Always be thinking about generators.
+    Any time I am working with a function that returns a sequence or works in a loop.
+Database?
+    prepend tables with year e.g. 2013_drivers, 2013_grandsprix
+Any benefit to recording place instead of points in the JSON file?
+    Place never changes, points can?
+
+
+#################################################
+TESTING
+#################################################
+Assert [Sebastian Vettel, 0] has [77] points.
